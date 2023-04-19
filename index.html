@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barra Lateral com Materialize</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Importe o Materialize CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<!-- Importe o ícone do Material Design -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<!-- Crie a estrutura da barra lateral -->
+	<ul id="slide-out" class="sidenav">
+		<li><a href="page1.html" data-page="page1.html" class="ajax-link">Página 1</a></li>
+		<li><a href="page2.html" data-page="page2.html" class="ajax-link">Página 2</a></li>
+		<li><a href="page3.html" data-page="page3.html" class="ajax-link">Página 3</a></li>
+	</ul>
+
+	<!-- Crie o botão de menu que irá exibir a barra lateral -->
+	<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+	<!-- Crie o conteúdo da página -->
+	<div class="container">
+		<div id="content"></div>
+	</div>
+
+	<!-- Importe o jQuery e o Materialize JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- Adicione o código AJAX -->
+	<script>
+		$(document).ready(function(){
+			$('.ajax-link').click(function(e){
+				e.preventDefault();
+				var pageUrl = $(this).data('page');
+				$.ajax({
+					url: pageUrl,
+					type: 'GET',
+					success: function(data){
+						$('#content').html(data);
+					}
+				});
+			});
+		});
+	</script>
+
+	<!-- Inicie o componente Sidenav -->
+	<script>
+		$(document).ready(function(){
+			$('.sidenav').sidenav();
+		});
+	</script>
+</body>
+</html>
